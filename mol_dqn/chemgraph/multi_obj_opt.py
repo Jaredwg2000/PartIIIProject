@@ -170,12 +170,13 @@ def main(argv):
   dim_output = 1
   cnsmpoModel = torch.nn.Sequential(
           torch.nn.Linear(dim_input, 256),
-          torch.nn.Linear(256, 128),
-          torch.nn.Linear(128, 64),
-          torch.nn.Linear(64, 32),
-          torch.nn.Linear(32, 16),
-          torch.nn.Linear(16, 8),
-          torch.nn.Linear(8, dim_output)
+          torch.nn.ReLU6(),
+          torch.nn.Linear(256, 256),
+          torch.nn.ReLU6(),
+          torch.nn.Linear(256, 32),
+          torch.nn.ReLU6(),
+          torch.nn.Linear(32, dim_output),
+          torch.nn.ReLU6()
         )
   cnsmpoModel.load_state_dict(torch.load("../../project_data/Pytorch-Models/cnsmpo-model/cnsmpo_model.pt"))
   cnsmpoModel.eval()
